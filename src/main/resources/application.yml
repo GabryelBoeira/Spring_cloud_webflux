@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: webhook-app
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/webhookdb
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+  flyway:
+    enabled: true
+    url: jdbc:postgresql://localhost:5432/webhookdb
+    user: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
+    locations: classpath:db/migration
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        enabled: true
+        instance-id: ${spring.application.name}:${random.value}
+        healthCheckPath: /actuator/health
+        healthCheckInterval: 10s
+        preferIpAddress: true
+        register: true
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
