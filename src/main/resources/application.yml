@@ -3,13 +3,13 @@ spring:
     name: webhook-app
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/webhookdb
-    username: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    username: root
+    password: root
   flyway:
     enabled: true
     url: jdbc:postgresql://localhost:5432/webhookdb
-    user: ${POSTGRES_USER}
-    password: ${POSTGRES_PASSWORD}
+    user: root
+    password: root
     locations: classpath:db/migration
   cloud:
     consul:
